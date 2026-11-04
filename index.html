@@ -18,6 +18,29 @@
             text-align: center;
         }
 
+        /* Estilos para el contenedor del buscador */
+        .buscador-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        #input_buscar {
+            padding: 10px 15px;
+            width: 80%;
+            max-width: 400px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #555;
+            background-color: #333;
+            color: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        #input_buscar:focus {
+            border-color: #00b5cc;
+        }
+
         #mostrar_personajes {
             display: flex;
             flex-wrap: wrap;
@@ -52,43 +75,73 @@
 
     <h1>Personajes de Rick and Morty</h1>
 
-    <div id="mostrar_personajes"></div>
+    <!-- Campo de texto para filtrar -->
+    <div class="buscador-container">
+        <input type="text" id="input_buscar" placeholder="Buscar personaje por nombre...">
+    </div>
+
+    <div id="mostrar_personajes">
+        
+    </div>
 
     <script>
+        // Guardaremos los personajes globalmente para no volver a hacer fetch en cada búsqueda
+        let listaPersonajes = [];
 
-        async function mostrar(){
-
-            try{
-
+        async function cargarPersonajes(){
+            try {
                 let datos = await fetch("https://rickandmortyapi.com/api/character");
-                let personajes = await datos.json();
+                let respuesta = await datos.json();
+                
+                // Guardamos los resultados
+                listaPersonajes = respuesta.results;
 
-                let contenedor = "";
-
-                for(let i = 0; i < personajes.results.length; i++){
-
-                    contenedor +=
-                    '<div class="card">' +
-                        '<img src="' + personajes.results[i].image + '">' +
-                        '<h3>' + personajes.results[i].name + '</h3>' +
-                        '<p>Especie: ' + personajes.results[i].species + '</p>' +
-                        '<p>Estado: ' + personajes.results[i].status + '</p>' +
-                        '<p>Género: ' + personajes.results[i].gender + '</p>' +
-                    '</div>';
-
-                }
-
-                document.getElementById("mostrar_personajes").innerHTML = contenedor;
+                // Renderizamos la lista completa al inicio
+                renderizarPersonajes(listaPersonajes);
 
             } catch(error){
-
-                alert("Error de conexion " + error);
-
+                alert("Error de conexión: " + error);
             }
-
         }
 
-        mostrar();
+        // Función encargada de dibujar las tarjetas en pantalla
+        function renderizarPersonajes(personajes){
+            let contenedor = "";
+
+            if (personajes.length === 0) {
+                document.getElementById("mostrar_personajes").innerHTML = "<p>No se encontraron personajes.</p>";
+                return;
+            }
+
+            for(let i = 0; i < personajes.length; i++){
+                contenedor +=
+                '<div class="card">' +
+                    '<img src="' + personajes[i].image + '">' +
+                    '<h3>' + personajes[i].name + '</h3>' +
+                    '<p>Especie: ' + personajes[i].species + '</p>' +
+                    '<p>Estado: ' + personajes[i].status + '</p>' +
+                    '<p>Género: ' + personajes[i].gender + '</p>' +
+                '</div>';
+            }
+
+            document.getElementById("mostrar_personajes").innerHTML = contenedor;
+        }
+
+        // Evento que se ejecuta cada vez que el usuario escribe en el input
+        document.getElementById("input_buscar").addEventListener("keyup", function(e) {
+            let textoBusqueda = e.target.value.toLowerCase();
+
+            // Filtramos la lista original comparando los nombres
+            let personajesFiltrados = listaPersonajes.filter(function(personaje) {
+                return personaje.name.toLowerCase().includes(textoBusqueda);
+            });
+
+            // Volvemos a renderizar solo los que coinciden
+            renderizarPersonajes(personajesFiltrados);
+        });
+
+        // Inicializamos la carga de datos
+        cargarPersonajes();
 
     </script>
 
