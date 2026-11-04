@@ -82,7 +82,7 @@ mostrar();
 
 </script>
 
-<style scoped>
+<style >
 body {
     font-family: Arial, sans-serif;
     background-color: #222;

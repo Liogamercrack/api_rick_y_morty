@@ -1,0 +1,183 @@
+
+[
+    {
+        "nombre": "Lucas",
+        "apellido": "Gonzalez",
+        "materia": "Matematica",
+        "nota": 8
+    },
+    {
+        "nombre": "Sofia",
+        "apellido": "Martinez",
+        "materia": "Programacion",
+        "nota": 9
+    },
+    {
+        "nombre": "Mateo",
+        "apellido": "Rodriguez",
+        "materia": "Base de Datos",
+        "nota": 7
+    },
+    {
+        "nombre": "Camila",
+        "apellido": "Fernandez",
+        "materia": "Ingles",
+        "nota": 10
+    },
+    {
+        "nombre": "Benjamin",
+        "apellido": "Lopez",
+        "materia": "Matematica",
+        "nota": 6
+    },
+    {
+        "nombre": "Valentina",
+        "apellido": "Perez",
+        "materia": "Programacion",
+        "nota": 8
+    },
+    {
+        "nombre": "Tomas",
+        "apellido": "Sanchez",
+        "materia": "Base de Datos",
+        "nota": 9
+    },
+    {
+        "nombre": "Martina",
+        "apellido": "Romero",
+        "materia": "Ingles",
+        "nota": 7
+    },
+    {
+        "nombre": "Joaquin",
+        "apellido": "Torres",
+        "materia": "Matematica",
+        "nota": 10
+    },
+    {
+        "nombre": "Lucia",
+        "apellido": "Diaz",
+        "materia": "Programacion",
+        "nota": 8
+    },
+    {
+        "nombre": "Thiago",
+        "apellido": "Alvarez",
+        "materia": "Base de Datos",
+        "nota": 6
+    },
+    {
+        "nombre": "Emma",
+        "apellido": "Ruiz",
+        "materia": "Ingles",
+        "nota": 9
+    },
+    {
+        "nombre": "Santiago",
+        "apellido": "Ramirez",
+        "materia": "Matematica",
+        "nota": 7
+    },
+    {
+        "nombre": "Catalina",
+        "apellido": "Flores",
+        "materia": "Programacion",
+        "nota": 10
+    },
+    {
+        "nombre": "Nicolas",
+        "apellido": "Acosta",
+        "materia": "Base de Datos",
+        "nota": 8
+    },
+    {
+        "nombre": "Mia",
+        "apellido": "Benitez",
+        "materia": "Ingles",
+        "nota": 9
+    },
+    {
+        "nombre": "Franco",
+        "apellido": "Medina",
+        "materia": "Matematica",
+        "nota": 5
+    },
+    {
+        "nombre": "Julieta",
+        "apellido": "Herrera",
+        "materia": "Programacion",
+        "nota": 7
+    },
+    {
+        "nombre": "Agustin",
+        "apellido": "Castro",
+        "materia": "Base de Datos",
+        "nota": 10
+    },
+    {
+        "nombre": "Renata",
+        "apellido": "Ortiz",
+        "materia": "Ingles",
+        "nota": 8
+    },
+    {
+        "nombre": "Facundo",
+        "apellido": "Silva",
+        "materia": "Matematica",
+        "nota": 9
+    },
+    {
+        "nombre": "Isabella",
+        "apellido": "Molina",
+        "materia": "Programacion",
+        "nota": 6
+    },
+    {
+        "nombre": "Gabriel",
+        "apellido": "Nunez",
+        "materia": "Base de Datos",
+        "nota": 7
+    },
+    {
+        "nombre": "Olivia",
+        "apellido": "Cabrera",
+        "materia": "Ingles",
+        "nota": 10
+    },
+    {
+        "nombre": "Dylan",
+        "apellido": "Vargas",
+        "materia": "Matematica",
+        "nota": 8
+    },
+    {
+        "nombre": "Abril",
+        "apellido": "Rojas",
+        "materia": "Programacion",
+        "nota": 9
+    },
+    {
+        "nombre": "Valentino",
+        "apellido": "Ibarra",
+        "materia": "Base de Datos",
+        "nota": 4
+    },
+    {
+        "nombre": "Pilar",
+        "apellido": "Morales",
+        "materia": "Ingles",
+        "nota": 7
+    },
+    {
+        "nombre": "Lautaro",
+        "apellido": "Gutierrez",
+        "materia": "Matematica",
+        "nota": 6
+    },
+    {
+        "nombre": "Alma",
+        "apellido": "Peralta",
+        "materia": "Programacion",
+        "nota": 10
+    }
+]
