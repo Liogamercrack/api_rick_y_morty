@@ -1,4 +1,3 @@
-
 <template>
     <main>
         <h1>Personajes de Rick and Morty</h1>
@@ -11,6 +10,24 @@
                 placeholder="Buscar personaje por nombre..."
                 v-model="textoBusqueda"
             >
+        </div>
+
+        <!-- NUEVO: sección de personajes guardados -->
+        <div v-if="personajesGuardados.length > 0" class="guardados-container">
+            <h2>Personajes guardados ({{ personajesGuardados.length }})</h2>
+            <div class="guardados-lista">
+                <div
+                    class="card"
+                    v-for="personaje in personajesGuardados"
+                    :key="personaje.id"
+                >
+                    <img :src="personaje.image">
+                    <h3>{{ personaje.name }}</h3>
+                    <button class="btn-guardar guardado" @click="quitarPersonaje(personaje.id)">
+                        Quitar
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div id="mostrar_personajes">
@@ -33,6 +50,15 @@
                 <p>Estado: {{ personaje.status }}</p>
 
                 <p>Género: {{ personaje.gender }}</p>
+
+                <!-- NUEVO: botón para guardar -->
+                <button
+                    class="btn-guardar"
+                    :class="{ guardado: estaGuardado(personaje.id) }"
+                    @click="guardarPersonaje(personaje)"
+                >
+                    {{ estaGuardado(personaje.id) ? "Guardado ✓" : "Guardar" }}
+                </button>
             </div>
 
         </div>
@@ -46,6 +72,18 @@ import { ref } from "vue";
 const listaPersonajes = ref([]);
 
 const textoBusqueda = ref("");
+
+// NUEVO: lista de personajes guardados (se recupera de localStorage al iniciar)
+const personajesGuardados = ref([]);
+
+try {
+    const guardadosPrevios = localStorage.getItem("personajesGuardados");
+    if (guardadosPrevios) {
+        personajesGuardados.value = JSON.parse(guardadosPrevios);
+    }
+} catch (error) {
+    personajesGuardados.value = [];
+}
 
 async function mostrar() {
     try {
@@ -75,6 +113,42 @@ function buscarPersonajes() {
 
     // Devolvemos los personajes que coinciden
     return personajesFiltrados;
+}
+
+// NUEVO: indica si un personaje ya está guardado
+function estaGuardado(id) {
+    return personajesGuardados.value.some(function(p) {
+        return p.id === id;
+    });
+}
+
+// NUEVO: guarda un personaje (si ya estaba guardado, no hace nada)
+function guardarPersonaje(personaje) {
+    if (estaGuardado(personaje.id)) {
+        return;
+    }
+    personajesGuardados.value.push(personaje);
+    actualizarAlmacenamiento();
+}
+
+// NUEVO: quita un personaje de la lista de guardados
+function quitarPersonaje(id) {
+    personajesGuardados.value = personajesGuardados.value.filter(function(p) {
+        return p.id !== id;
+    });
+    actualizarAlmacenamiento();
+}
+
+// NUEVO: persiste la lista en localStorage
+function actualizarAlmacenamiento() {
+    try {
+        localStorage.setItem(
+            "personajesGuardados",
+            JSON.stringify(personajesGuardados.value)
+        );
+    } catch (error) {
+        alert("No se pudo guardar: " + error);
+    }
 }
 
 // Inicializamos la carga de datos
@@ -144,5 +218,45 @@ h1 {
 
 .card p {
     margin: 5px;
+}
+
+/* NUEVO: estilos del botón guardar y la sección de guardados */
+.btn-guardar {
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #00b5cc;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-guardar:hover {
+    background-color: #008fa1;
+}
+
+.btn-guardar.guardado {
+    background-color: #555;
+}
+
+.guardados-container {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 2px dashed #00b5cc;
+    border-radius: 10px;
+}
+
+.guardados-container h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.guardados-lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 </style>
